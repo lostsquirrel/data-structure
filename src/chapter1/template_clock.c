@@ -11,9 +11,9 @@ int man(void) {
 	//code count on time
 	stop = clock()
 
-	duration = ((double)(stop - start)) / CLK_TCK;
+	duration = ((double)(stop - start)) / CLOCKS_PER_SEC;
 
-	printf("%s\n", CLK_TCK);
+	printf("%s\n", CLOCKS_PER_SEC);
 
 	return 0;
 }
