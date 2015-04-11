@@ -1,12 +1,13 @@
+/*
+1.1.3 关于算法效率 - 例：计算多项式值（10:17）
+f(x) = ∑i*x^i  (i=[0,9])
+*/
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
 
 #define MAXN 10
-/*
-1.1.3 关于算法效率 - 例：计算多项式值（10:17）
-f(x) = ∑i*x^i  (i=[0,9])
-*/
+
 
 double f1(int n, double a[n], double x) {
 	int i;

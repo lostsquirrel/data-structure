@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <time.h>
 
-clock_t start, stop
+clock_t start, stop;
 
-double duration;
-
-int man(void) {
+int main(void) {
 	//code for prepare
-	start = clock()
+	start = clock();
 	//code count on time
-	stop = clock()
+	printf("CLOCKS_PER_SEC = %ld\n", CLOCKS_PER_SEC);
 
-	duration = ((double)(stop - start)) / CLOCKS_PER_SEC;
+	stop = clock();
 
-	printf("%s\n", CLOCKS_PER_SEC);
+	double duration = ((double)(stop - start)) / CLOCKS_PER_SEC;
+	printf("itme: %f\n", duration);
 
 	return 0;
 }

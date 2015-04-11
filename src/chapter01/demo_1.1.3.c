@@ -1,9 +1,10 @@
-#include <stdio.h>
-
 /*
 最大子列和问题
+三种算法 还有一个
 
 */
+#include <stdio.h>
+
 
 int max_subsqu_sum_1(int a[], int n) {
 	int i, j, k;
