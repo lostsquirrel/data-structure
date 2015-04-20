@@ -23,17 +23,6 @@ List * makeEmptyList() {
 	return ptrl;
 }
 
-int find(int x, List *ptrl) {
-	int a = 0;
-	while(a <= ptrl->last) {
-		if (x == (ptrl->data)[a]) {
-			return a;
-		}
-		a++;
-	}
-	return -1;
-}
-
 int * findKth(int k, List *ptrl) {
 	int *res = NULL;
 	if (k < ptrl->last && k >= 0) {
@@ -50,6 +39,8 @@ int findElement(int x, List *ptrl) {
 			res = i;
 			break;
 		}
+		i++;
+
 	}
 
 	return res;
@@ -80,8 +71,13 @@ int del(int kth, List *ptrl) {
 			ptrl->data[kth] = ptrl->data[kth + 1];
 			kth++;
 		}
+
+		res = 1;
+	} else if (kth == ptrl->last) {
+//		ptrl->data[kth] = NULL;
 		res = 1;
 	}
+	ptrl->last -= res;
 
 	return res;
 }
@@ -95,7 +91,7 @@ int delElement(int x, List *ptrl) {
 			tag = 1;
 		}
 		// 如果找到 元素x 的索引为 a 那么从a开始依次往前移一个
-		if (tag) {
+		if (tag ) {//&& a < ptrl->last
 			ptrl->data[a] = ptrl->data[a  + 1];
 		}
 		a++;
@@ -141,7 +137,7 @@ int main(int argc, char const *argv[])
 		insert(i, data[i], list);
 	}
 	printList(list);
-	printf("-------------------insert-------------");
+	printf("-------------------insert-------------\n");
 	int tag = -1;
 	//插入列表头 -1
 	tag = insert(-1, -1, list);
@@ -166,7 +162,7 @@ int main(int argc, char const *argv[])
 	printf("tag for insert index 12 to -9: %d\n", tag);
 	printList(list);
 
-	printf("-------------------find-------------");
+	printf("-------------------find-------------\n");
 
 	printf("\nvalue of index -1:");
 	printIntPointer(findKth(-1, list));
@@ -175,5 +171,32 @@ int main(int argc, char const *argv[])
 	printf("\nvalue of index 14:");
 	printIntPointer(findKth(14, list));
 	printf("\n");
+	printf("\nindex of value -1:%d", findElement(-1, list));
+	printf("\nindex of value 8:%d", findElement(8, list));
+	printf("\nindex of value 7:%d", findElement(7, list));
+	printf("\nindex of value 100:%d", findElement(100, list));
+	printf("\n-------------------length-------------\n");
+	printf("lenght of list now: %d\n", length(list));
+	printf("\n-------------------delete at index 12-------------\n");
+	del(12, list);
+	printList(list);
+	printf("\n-------------------delete at index 5-------------\n");
+	del(5, list);
+	printList(list);
+	printf("\n-------------------delete at index 0-------------\n");
+	del(0, list);
+	printList(list);
+	printf("\n-------------------delete at value 3-------------\n");
+	delElement(3, list);
+	printList(list);
+	printf("\n-------------------delete at value 1-------------\n");
+	delElement(1, list);
+	printList(list);
+	printf("\n-------------------delete at value 9-------------\n");
+	delElement(9, list);
+	printList(list);
+	printf("\n-------------------delete at value 9-------------\n");
+	delElement(9, list);
+	printList(list);
 	return 0;
 }
