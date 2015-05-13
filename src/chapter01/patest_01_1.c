@@ -19,6 +19,8 @@
 -2 11 -4 13 -5 -2
 输出样例：
 20
+
+passed
 */
 
 int max_subsqu_sum_4(int a[], int n);
