@@ -8,7 +8,8 @@
 
  输入格式：以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过1000的整数）。数字间以空格分隔。
 
- 输出格式：以与输入相同的格式输出导数多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。注意“零多项式”的指数和系数都是0，但是表示为“0 0”。
+ 输出格式：以与输入相同的格式输出导数多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。
+ 注意“零多项式”的指数和系数都是0，但是表示为“0 0”。
 
  输入样例：
  3 4 -5 2 6 1 -2 0
@@ -17,6 +18,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct node {
 	int base;
@@ -35,25 +37,56 @@ void printList(const List *list);
 void printNode(const Node *node);
 
 int main(void) {
-	int a, b, c;
+	int a, b, i;
 	List *list = makeEmpty();
-	c = scanf("%d", &a);
-	c = scanf("%d", &b);
-	add(a * b, b - 1, list);
-	int x = b;
-	while (x > 0) {
-		int base, exp;
-		c = scanf("%d", &base);
-		c = scanf("%d", &exp);
-		add(base * exp, exp - 1, list);
-		x -= x - exp;
-
+	char all[6] = {'a'};
+//	i = scanf("%s", all);
+//	printf("%s", all);
+	char c;
+	int pos;
+	int temp;
+	i = 0;
+	do {
+		c = getchar();
+		printf("%c\n", c);
+		if (c == ' ' && i > 0) {
+			pos = 0;
+			temp = 0;
+			while (i > 0) {
+				if (all[i] == '-') {
+					temp *= -1;
+				} else {
+					temp += pow(10, pos);
+				}
+				i--;
+			}
+		} else {
+			i++;
+			all[i] = c;
+		}
 	}
-	printList(list);
+	while (c != '\n' && c != EOF);
+//	{
+//		if (c == ' ' && i > 1) {
+//			printf("%d", i);
+//			while (i > 0) {
+//				putchar(all[i]);
+//				all[i] = 'a';
+//				i--;
+//			}
+//			i = 1;
+//		} else {
+//			all[i] = c;
+//			c = getchar();
+//			i++;
+//		}
+//	}
+
+//	printList(list);
 }
 
 List * makeEmpty() {
-	List *list = (List*)malloc(sizeof(List));
+	List *list = (List*) malloc(sizeof(List));
 	list->head = NULL;
 	list->last = -1;
 
